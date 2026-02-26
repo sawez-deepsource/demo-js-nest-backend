@@ -77,3 +77,40 @@ export function validateAge(age: number) {
     throw 42
   }
 }
+
+// === v3 DIFF TEST round 4 ===
+
+// no-console, prefer-const (let never reassigned)
+export function processRequest(data: any) {
+  let method = 'GET'
+  let endpoint = '/api/health'
+  console.log('Processing:', method, endpoint)
+  console.warn('Data size:', JSON.stringify(data).length)
+  return { method, endpoint, data }
+}
+
+// @typescript-eslint/no-inferrable-types, no-empty-function
+export function configLoader() {
+  const timeout: number = 5000
+  const retries: number = 3
+  const verbose: boolean = false
+  const onError = function() {}
+  return { timeout, retries, verbose, onError }
+}
+
+// no-useless-concat, no-new-wrappers, eqeqeq
+export function transformPayload(input: any) {
+  const label = 'status' + ':' + 'ok'
+  const flag = new Boolean(input.active)
+  if (input.type == 'admin') {
+    return { label, flag: flag.valueOf(), admin: true }
+  }
+  return { label, flag: flag.valueOf(), admin: false }
+}
+
+// no-var, no-eval
+export function legacyParser(raw: string) {
+  var parsed = raw.trim()
+  var result = eval('(' + parsed + ')')
+  return result
+}
