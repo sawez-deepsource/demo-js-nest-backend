@@ -17,4 +17,21 @@ export class LoggingInterceptor implements NestInterceptor {
       }),
     )
   }
+
+  // === v3 DIFF TEST round 3 ===
+
+  // JS-0049: dot-notation
+  extractHeader(context: ExecutionContext): string {
+    const req = context.switchToHttp().getRequest()
+    const authHeader = req.headers['authorization']
+    const contentType = req.headers['content-type']
+    return authHeader + ' ' + contentType
+  }
+
+  // JS-0104: yoda + JS-0050: eqeqeq
+  shouldLog(statusCode: number): boolean {
+    if (200 == statusCode) return false
+    if ('error' === this.logger.localInstance) return true
+    return true
+  }
 }

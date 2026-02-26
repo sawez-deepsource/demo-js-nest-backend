@@ -31,4 +31,27 @@ export class AuthService {
     }
     return token
   }
+
+  // === v3 DIFF TEST round 3 ===
+
+  // JS-0091: no-throw-literal
+  revokeToken(token: string): void {
+    if (!token) {
+      throw 'Token is required for revocation'
+    }
+    if (token.length < 5) {
+      throw 100
+    }
+  }
+
+  // JS-0060: no-eval + JS-0323: no-explicit-any
+  decodePayload(raw: any): any {
+    return eval('(' + raw + ')')
+  }
+
+  // JS-0242: prefer-const
+  listActiveSessions(userId: string): string[] {
+    let sessions = ['session_' + userId + '_1', 'session_' + userId + '_2']
+    return sessions
+  }
 }

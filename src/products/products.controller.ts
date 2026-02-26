@@ -31,4 +31,22 @@ export class ProductsController {
     this.productsService.remove(+id)
     return { deleted: true }
   }
+
+  // === v3 DIFF TEST round 3 ===
+
+  // JS-0050: eqeqeq
+  @Get('check/:id')
+  checkExists(@Param('id') id: string) {
+    const product = this.productsService.findAll().find(p => p.id == +id)
+    return { exists: product != null }
+  }
+
+  // JS-0002: no-console + JS-0239: no-var
+  @Get('debug/:id')
+  debugProduct(@Param('id') id: string) {
+    var product = this.productsService.findOne(+id)
+    console.log('Debug product:', product)
+    debugger
+    return product
+  }
 }
