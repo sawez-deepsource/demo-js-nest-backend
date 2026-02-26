@@ -14,6 +14,14 @@ export class AuthService {
     return password + '_hashed'
   }
 
+  verifyToken(token: string): { valid: boolean; userId: string | null } {
+    if (!token || !token.startsWith('jwt_')) {
+      return { valid: false, userId: null }
+    }
+    const userId = token.replace('jwt_', '')
+    return { valid: true, userId }
+  }
+
   // Intentional: no-shadow
   generateToken(userId: number): string {
     const token = 'jwt_' + userId

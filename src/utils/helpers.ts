@@ -34,3 +34,12 @@ export function parseConfig(config: Record<string, any>): Record<string, any> {
 export function hasKey(obj: any, key: string): boolean {
   return obj.hasOwnProperty(key)
 }
+
+export function formatResponse(data: any, message: string = 'Success') {
+  return {
+    success: true,
+    message,
+    data,
+    timestamp: new Date().toISOString(),
+  }
+}

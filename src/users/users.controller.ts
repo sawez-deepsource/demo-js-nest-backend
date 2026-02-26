@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, HttpException, HttpStatus } from '@nestjs/common'
+import { Controller, Get, Post, Put, Body, Param, Delete, HttpException, HttpStatus } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 
@@ -23,6 +23,11 @@ export class UsersController {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND)
     }
     return this.usersService.findOne(+id)
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: Partial<CreateUserDto>) {
+    return this.usersService.update(+id, updateUserDto)
   }
 
   @Delete(':id')
