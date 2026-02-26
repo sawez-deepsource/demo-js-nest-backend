@@ -46,4 +46,23 @@ export class UsersService {
     }
     this.users.splice(index, 1)
   }
+
+  // === v3 DIFF TEST — new code below ===
+
+  // no-throw-literal
+  ban(id: number): void {
+    const user = this.users.find(u => u.id === id)
+    if (!user) {
+      throw 'User not found for ban'
+    }
+    console.log('Banning user:', user.name)
+  }
+
+  // prefer-template + no-console
+  describe(id: number): string {
+    const user = this.users.find(u => u.id === id)
+    if (!user) return 'unknown'
+    console.log('Describing user ' + user.name)
+    return 'User: ' + user.name + ' (' + user.email + ')'
+  }
 }

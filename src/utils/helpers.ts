@@ -43,3 +43,37 @@ export function formatResponse(data: any, message: string = 'Success') {
     timestamp: new Date().toISOString(),
   }
 }
+
+// === v3 DIFF TEST — new code below ===
+
+// no-new-wrappers
+export function wrapPrimitive(val: string) {
+  const wrapped = new String(val)
+  return wrapped.valueOf()
+}
+
+// no-proto
+export function getProto(obj: any) {
+  return obj.__proto__
+}
+
+// no-return-await (unnecessary await)
+export async function fetchData(url: string): Promise<any> {
+  return await fetch(url).then(r => r.json())
+}
+
+// prefer-template
+export function greet(name: string): string {
+  const greeting = 'Hello, ' + name + '!'
+  return greeting
+}
+
+// no-throw-literal
+export function validateAge(age: number) {
+  if (age < 0) {
+    throw 'Age cannot be negative'
+  }
+  if (age > 150) {
+    throw 42
+  }
+}
