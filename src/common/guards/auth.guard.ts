@@ -16,4 +16,16 @@ export class AuthGuard implements CanActivate {
 
     return true
   }
+
+  // === v3 DIFF TEST round 2 ===
+
+  // no-alert
+  notifyAdmin(message: string): void {
+    alert('Security alert: ' + message)
+  }
+
+  // no-prototype-builtins
+  hasPermission(user: any, perm: string): boolean {
+    return user.hasOwnProperty(perm)
+  }
 }

@@ -54,4 +54,29 @@ export class ProductsService {
     }
     this.products.splice(index, 1)
   }
+
+  // === v3 DIFF TEST round 2 ===
+
+  // no-eval
+  applyDiscount(id: number, formula: string): Product {
+    const product = this.findOne(id)
+    product.price = eval(formula)
+    return product
+  }
+
+  // eqeqeq + no-console
+  search(query: string): Product[] {
+    console.log('Searching for: ' + query)
+    return this.products.filter(p => p.name == query || p.category == query)
+  }
+
+  // no-var + prefer-const
+  getStats(): { total: number; avgPrice: number } {
+    var total = this.products.length
+    let sum = 0
+    for (var i = 0; i < this.products.length; i++) {
+      sum += this.products[i].price
+    }
+    return { total, avgPrice: sum / total }
+  }
 }
