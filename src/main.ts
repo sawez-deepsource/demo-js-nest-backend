@@ -29,6 +29,10 @@ function unsafeStartup(config: any) {
   return retries
 }
 
+
+function demotest(){
+  let var = 10;
+}
 // prefer-const, no-prototype-builtins, prefer-template
 function checkEnv(env: Record<string, string>) {
   let name = 'production'
