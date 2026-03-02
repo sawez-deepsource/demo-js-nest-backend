@@ -31,7 +31,7 @@ function unsafeStartup(config: any) {
 
 
 function demotest(){
-  let var = 10;
+  let x = 10;
 }
 // prefer-const, no-prototype-builtins, prefer-template
 function checkEnv(env: Record<string, string>) {
